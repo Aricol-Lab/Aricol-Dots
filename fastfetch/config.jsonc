@@ -1,0 +1,114 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+
+  "logo": {
+    "type": "auto",
+    "source": "~/.config/fastfetch/archlogo.txt",
+    "padding": { "left": 0, "right": 2 }
+  },
+
+  "modules": [
+
+    {
+      "type": "title",
+      "format": "{user-name}@{host-name}",
+      "color": {
+        "user": "bright_cyan",
+        "at": "bright_black",
+        "host": "magenta"
+      }
+    },
+
+    {
+      "type": "custom",
+      "format": "╭───────────────────────────────────────────╮"
+    },
+
+    {
+      "type": "os",
+      "key": "{#default}│{#cyan} 󰻀  os",
+      "format": "{name}{version}      │"
+    },
+
+    {
+      "type": "kernel",
+      "key": "{#default}│{#cyan} 󰒔  kernel",
+      "format": "{release} {#default}                │"
+    },
+
+    {
+      "type": "command",
+      "key": "{#default}│{#cyan} 󰃰  age",
+      "text": "printf '%-34s│' \"$(( ($(date +%s) - $(stat -Lc %W /)) / 86400 )) days\""
+    },
+
+    {
+      "type": "command",
+      "key": "{#default}│{#cyan} 󰏗  packages",
+      "text": "printf '%-30s│' \"$(echo \"$(pacman -Q | wc -l) (pacman)·$(flatpak list | wc -l) (flatpak)\")\""
+    },
+
+    {
+      "type": "custom",
+      "format": "├───────────────────────────────────────────┤"
+    },
+
+    {
+      "type": "de",
+      "key": "{#default}│{#magenta} 󰧨  de",
+      "format": "{pretty-name} {version} (Wayland)       │"
+    },
+
+    {
+      "type": "wm",
+      "key": "{#default}│{#magenta} 󱂬  wm",
+      "format": "{pretty-name} {version} (Wayland)          │"
+    },
+
+    {
+      "type": "terminal",
+      "key": "{#default}│{#magenta} 󰆍  terminal",
+      "format": "{pretty-name} {version}                 │"
+    },
+
+    {
+      "type": "custom",
+      "format": "├───────────────────────────────────────────┤"
+    },
+
+    {
+      "type": "command",
+      "key": "│ 󰻟  cpu",
+      "keyColor": "#ffd0e1",
+      "text": "printf '%-36s│' \"$(cpu=$(lscpu | awk -F: '/Model name:/ {gsub(/^ +/, \"\", $2); if (match($2, /i[3579]-[0-9A-Z]+/)) {cpu=substr($2,RSTART,RLENGTH); sub(/^i/, \"I\", cpu); print cpu}}'); printf '%s · %sC/%sT · %s' \"$cpu\" \"$(lscpu -p=core | grep -v '^#' | sort -u | wc -l)\" \"$(nproc)\" \"$(lscpu | awk -F: '/CPU max MHz:/ {printf \"%.1fGHz\", $2/1000}')\")\""
+    },
+
+    {
+      "type": "gpu",
+      "key": "│ 󰾲  gpu",
+      "keyColor": "#ffd0e1",
+      "temp": true,
+      "format": "{name}                  │"
+    },
+
+    {
+      "type": "memory",
+      "key": "│ 󰍛  ram",
+      "keyColor": "#ffd0e1",
+      "format": "{total}                         │"
+    },
+
+
+    {
+      "type": "custom",
+      "format": "╰───────────────────────────────────────────╯"
+    },
+
+    {
+      "type": "command",
+      "key": " time",
+      "text": "date \"+%A, %d, %B, %H:%M:%S\""
+    },
+  ]
+}
+
